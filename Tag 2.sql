@@ -1,11 +1,11 @@
 
 -- SQL 11.06.2024
 
--- Übungsaufgaben zu LIKE, IN, BETWEEN
+-- Ãœbungsaufgaben zu LIKE, IN, BETWEEN
 
 --1. Schreibe zwei Abfragen (BETWEEN, IN), die alle Lieferungen vom 05.08.90. bzw. 06.08.90 ausgeben
 --2. Schreibe eine Abfrage die die Nummer und Namen aller roten oder blauen Artikel aus Hamburg 
---ausgibt sowie die Artikel die eine Lagermenge zwischen 900 und 1500 Stück haben
+--ausgibt sowie die Artikel die eine Lagermenge zwischen 900 und 1500 StÃ¼ck haben
 --3. Schreibe eine Abfrage die alle Lieferanten ausgibt, deren Namen mit A oder S beginnen
 --4. Schreibe eine Abfrage die die Namen, Lieferantennummern und den Status aller Lieferanten
 -- ausgibt, die im August 1990 ausgeliefert haben und in Ludwigshafen leben.
@@ -34,8 +34,8 @@ WHERE lstadt = 'Ludwigshafen' AND lnr IN (SELECT lnr FROM lieferung
 
 -- CASE-Funktionen
 
--- Vergelicht einen Ausdruck mit mehreren einfachen Ausdrücken um das Ergebnis zu bestimmen
--- wird in der Select abfrage eingefügt
+-- Vergelicht einen Ausdruck mit mehreren einfachen AusdrÃ¼cken um das Ergebnis zu bestimmen
+-- wird in der Select abfrage eingefÃ¼gt
 
 SELECT anr, aname, amenge, CASE astadt
 								WHEN 'Hamburg' THEN 'lagert in Hamburg'
@@ -46,7 +46,7 @@ FROM artikel;
 
 
 SELECT lnr, anr, CASE
-					WHEN lmenge BETWEEN '0' AND '100' THEN 'hätte mehr draufgepast'
+					WHEN lmenge BETWEEN '0' AND '100' THEN 'hÃ¤tte mehr draufgepast'
 					WHEN lmenge BETWEEN '101' AND '300' THEN 'Gut ausgelastet'
 					ELSE 'Anzeige ist raus du birne'
 					END AS 'Liefermengennotiz'
@@ -82,8 +82,8 @@ SELECT anr, astadt, amenge % 200 AS 'Restmenge' FROM artikel
 WHERE anr= 'A05';
 -- Ergbnis 100 | % zeigt den ganzzahligen Rest 1300/200= 6 Rest= 100
 
--- der Operator + kann auch für das verketten von Zeichenfolgen verwendet werden
--- fügt zwie Zeichenfoglen aneinander
+-- der Operator + kann auch fÃ¼r das verketten von Zeichenfolgen verwendet werden
+-- fÃ¼gt zwie Zeichenfoglen aneinander
 
 SELECT 'Der Lieferant ' + lname + 'wohnt in ' + lstadt FROM lieferant
 -- Ausgabe: DEr Lieferant Schmidt wohnt in Hamburg
@@ -96,7 +96,7 @@ WHERE anr= 'A03';
 -- Ausgabe: Die Schraube mit der Artikelnummer A03 ist blau und wird in Mannheim gelagert.
 
 -------------------------------------------------------------------------------------------
--- Übungsaufgabe
+-- Ãœbungsaufgabe
 --1. Die nummern und namen aller Artikel und ihr gewicht in KG
 --2. Artikelnummer, Name und Lagerort aller Artikel die am 23.7.90 versendet wurden
 --3. Nummern und Namen der Lieferanten, deren Status kleiner als der von Lieferant L03 ist.
@@ -136,7 +136,7 @@ WHERE lnr NOT IN(SELECT lnr FROM lieferung
 -- Einsatz von Aggregatfunktionen
 
 -- AVG (average) Durschnitt der Spaltenwerte
--- MAX größter Spaltenwert
+-- MAX grÃ¶ÃŸter Spaltenwert
 -- MIN kleinster Spaltenwert
 -- SUM Summe der nummerischen Spalten
 -- COUNT Anzahl der Spaltenwerte
@@ -144,28 +144,28 @@ WHERE lnr NOT IN(SELECT lnr FROM lieferung
 -- der Nach der Alphabetischen Reihnfolge erster Lieferant
 SELECT MIN(lname) FROM lieferant;
 
--- größten, kleinsten und den durchschnitts status aller Lieferranten
+-- grÃ¶ÃŸten, kleinsten und den durchschnitts status aller Lieferranten
 SELECT MAX(status) AS 'Maximum', MIN(status) AS 'Minimum', AVG(status) AS 'Durchschnitt' FROM lieferant;
 
---- Anzahl aller bisherigen Lieferungen, die Lieferanten durchgeführt haben
+--- Anzahl aller bisherigen Lieferungen, die Lieferanten durchgefÃ¼hrt haben
 SELECT COUNT(*) FROM lieferung;
 
 SELECT COUNT(lnr) FROM lieferung;
 
--- Aggregatfunktionen dürfen nicht miteinader verschachtelt werden
+-- Aggregatfunktionen dÃ¼rfen nicht miteinader verschachtelt werden
 SELECT COUNT(MAX(status)) FROM lieferant;
 -- Geht nicht!
 -- folgende Meldungen wird ausgegeben:
--- Eine Aggregatfunktion kann auf einem Ausdruck, der ein Aggregat oder eine Unterabfrage enthält, nicht ausgeführt werden.
+-- Eine Aggregatfunktion kann auf einem Ausdruck, der ein Aggregat oder eine Unterabfrage enthÃ¤lt, nicht ausgefÃ¼hrt werden.
 
--- Übungen
---1. Namen des Artikels mit dem höchsten Lagerbestand
+-- Ãœbungen
+--1. Namen des Artikels mit dem hÃ¶chsten Lagerbestand
 --2. Die durchschnittsmenge aller gelagerten artikel
 --3. Den kleinsten Status aller Lieferanten
---4. Die größte Liefermenge aller lieferungen
+--4. Die grÃ¶ÃŸte Liefermenge aller lieferungen
 
 --1:
-SELECT MAX(amenge) AS 'Höhste Lagermenge' FROM artikel;
+SELECT MAX(amenge) AS 'HÃ¶hste Lagermenge' FROM artikel;
 
 --2:
 SELECT AVG(amenge) AS 'durchschnittliche Lagermenge' FROM artikel;
@@ -177,16 +177,16 @@ SELECT MIN(status) AS 'kleinster Status' FROM lieferant;
 SELECT MAX(lmenge) AS 'Max Liefermenge' FROM lieferung;
 
 -- GROUP BY- Klausel
--- legt Spalten fest, über die Gruppen gebildet werden
+-- legt Spalten fest, Ã¼ber die Gruppen gebildet werden
 
 -- gesucht sind die kleinste Liefermenge eines jeden Lieferanten
 SELECT lnr, MIN(lmenge) FROM lieferung
 GROUP BY lnr;
 
 -- ist in der SELECT anweisung eine WHERE klausesel enthalten, werden alle Zeilen,
--- die diese nichterfüllen, von dee Gruppenbildung eliminiert
+-- die diese nichterfÃ¼llen, von dee Gruppenbildung eliminiert
 
--- gescuht ist die größte Lieferung eines jeden Lieferanten nach dem 23.07.90
+-- gescuht ist die grÃ¶ÃŸte Lieferung eines jeden Lieferanten nach dem 23.07.90
 SELECT lnr, MAX(lmenge) AS 'Liefermenge' FROM lieferung
 WHERE ldatum > '23.07.1990'
 GROUP BY lnr ORDER BY 'Liefermenge' ASC;
