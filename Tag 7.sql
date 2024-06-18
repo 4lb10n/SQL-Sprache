@@ -1,13 +1,13 @@
 -- 18.06.24
 
--- Übungsaufgaben
+-- Ãœbungsaufgaben
 /*
 1. Nummern und Namen aller Lieferanten, die mindestens zwei verschiedene Artikel geliefert haben.
 2. Nummern, Namen und Status aller Lieferanten,
 	die schon einmal geliefert haben, aber den Artikel A05 nicht lieferten.
 3.Die Daten aller Lieferanten, die alle Artikel mindestens einmal lieferten.
 4. Anzahl der Lieferungen, die seit dem 01.06.1990 von Lieferanten aus Ludwigshafen
-	durchgeführt wurden
+	durchgefÃ¼hrt wurden
 5. Gesantlieferemenge aller Lieferungen des Artikel A01 durch den Lieferanten L02
 */
 
@@ -48,7 +48,7 @@ AND lnr in (SELECT lnr FROM lieferung);
 SELECT * FROM lieferung
 WHERE anr LIKE 'A0%' AND lmenge >= '1';
 
--- lösung
+-- lÃ¶sung
 SELECT a.* FROM lieferant a JOIN lieferung b
 ON a.lnr=b.lnr
 GROUP BY a.lnr, lname, status, lstadt
@@ -68,10 +68,10 @@ WHERE lnr = 'L02' AND anr = 'A01';
 /*
 1. Die Daten aller Lieferanten aus Aachen
 2. Die Nummern, Namen und Lagerorte aller gelieferten Artikel
-3. Die Nummern, und ´namen aller artikel sowie ihr Gewicht in KG
+3. Die Nummern, und Â´namen aller artikel sowie ihr Gewicht in KG
 4. Die Daten aller Lieferanten, mit eionem Status zwischen 20 und 40
-5. Die Namen und das Gewicht aller Artikel, wenn ihr Gewicht 17 oder 19 gramm beträgt
-6.Artikelnamen und Artikelnummern sowie die Lieferantennummer mit Übereinstimmenden
+5. Die Namen und das Gewicht aller Artikel, wenn ihr Gewicht 17 oder 19 gramm betrÃ¤gt
+6.Artikelnamen und Artikelnummern sowie die Lieferantennummer mit Ãœbereinstimmenden
 	Wohn und Lagerort
 7. Nummern und Namen aller Lieferanten, die die selben Arikel wie Lieferant L03 geliefert haben
 8. Durchschnittliche Liefermenge des Artikels A01
