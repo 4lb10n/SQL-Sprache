@@ -2,19 +2,19 @@
 
 -- OFFSET FETCH
 
--- übungen zu TOP Klausel
+-- Ã¼bungen zu TOP Klausel
 
--- Gesucht sind die Drei Lieferungen mit den höchsten Liefermengen
+-- Gesucht sind die Drei Lieferungen mit den hÃ¶chsten Liefermengen
 SELECT TOP(3) lmenge, lnr, anr, ldatum FROM lieferung
 ORDER BY lmenge DESC;
 
--- Mit OFFSET gibt man an, wieviele Datensätze übersprungen werden sollen bevor ein Ergebnis
+-- Mit OFFSET gibt man an, wieviele DatensÃ¤tze Ã¼bersprungen werden sollen bevor ein Ergebnis
 -- ausgegeben wird
 
--- FETCH gibt die Anzahl der Zeilen an, die zurückgebenen werden sollen, nachdem OFFSET
+-- FETCH gibt die Anzahl der Zeilen an, die zurÃ¼ckgebenen werden sollen, nachdem OFFSET
 -- verarbeitet wurde
 
--- gesucht sind die stärksten Lieferungen nach den ersten drei starken Lieferungen
+-- gesucht sind die stÃ¤rksten Lieferungen nach den ersten drei starken Lieferungen
 SELECT a.lnr, lname, lmenge FROM lieferant a JOIN lieferung b
 ON a.lnr=b.lnr 
 ORDER BY lmenge DESC
@@ -36,10 +36,10 @@ SELECT * FROM lieferung;
 -- second			ss,s
 -- milliesecond		ms
 
--- Datumsfunktionen können in der SELECT anweisung Überall stehen, wo ausdrücke entstehen können
+-- Datumsfunktionen kÃ¶nnen in der SELECT anweisung Ãœberall stehen, wo ausdrÃ¼cke entstehen kÃ¶nnen
 -- Datumangaben werden in Hochkommas gesetzt
 
--- gesucht sind die artikel nummern, das lieferdatum und möglihce Zahlungsziel (30 Tage)
+-- gesucht sind die artikel nummern, das lieferdatum und mÃ¶glihce Zahlungsziel (30 Tage)
 SELECT anr, ldatum, DATEADD(DD,30,ldatum) AS 'Zahlungsziel' FROM lieferung;
 
 
@@ -54,7 +54,7 @@ SELECT anr, ldatum, DATEADD(DD,30,ldatum) AS 'Zahlungsziel' FROM lieferung;
 -- ORDER BY
 -- bestimmt die Reinfolge, in der die RANK Werte sortiert werden
 
--- Die Rangfolge der Lieferanten anhand der Gesamliefermenge, mit Lücken
+-- Die Rangfolge der Lieferanten anhand der Gesamliefermenge, mit LÃ¼cken
 SELECT a.lnr, lname, RANK() OVER (ORDER BY SUM(lmenge) DESC) AS 'Rang',
 SUM(lmenge) AS 'Gesamtliefermenge'
 FROM lieferant a JOIN lieferung b
@@ -76,10 +76,10 @@ ORDER BY aname;
 
 -- Rangfolgefunltion ROW_NUMBER
 
--- gibt die fortlaufende Nummer einer Zeile innerhalb einer Partition zurück.
+-- gibt die fortlaufende Nummer einer Zeile innerhalb einer Partition zurÃ¼ck.
 -- Sie kann mit oder ohne PARTITION BY Klausel verwendet werden
 
--- Zeilennummern für jeden Lieferanten
+-- Zeilennummern fÃ¼r jeden Lieferanten
 SELECT ROW_NUMBER() OVER(ORDER BY lnr DESC) AS'row number', lnr,lname, lstadt
 FROM lieferant;
 
@@ -88,33 +88,33 @@ FROM lieferant;
 
 ---------------------------------------------------------------------------------------
 
--- Temporäre Tabellen
+-- TemporÃ¤re Tabellen
 
--- Lokale temporäre Tabellenn, können von jeden Datenbanknutzer erstellt werden.
--- Sie sind nur in der aktuellen Sitzung verfügbar
+-- Lokale temporÃ¤re Tabellenn, kÃ¶nnen von jeden Datenbanknutzer erstellt werden.
+-- Sie sind nur in der aktuellen Sitzung verfÃ¼gbar
 
--- Die temporäre Tabelle gute_lieferanten soll erstellt werden, mit allen Lieferanten
--- deren Status 30 oder höher ist
+-- Die temporÃ¤re Tabelle gute_lieferanten soll erstellt werden, mit allen Lieferanten
+-- deren Status 30 oder hÃ¶her ist
 SELECT lnr, lname INTO #gute_lieferanten FROM lieferant
 WHERE status >= '30';
 
 SELECT * FROM #gute_lieferanten;
 
--- lokale temporäre Tabellen # tabellenname
--- globale temporäre Tabellen ## tabellenname
+-- lokale temporÃ¤re Tabellen # tabellenname
+-- globale temporÃ¤re Tabellen ## tabellenname
 
 
 /*
-Übungsaufgaben
+Ãœbungsaufgaben
 
 1. Lieferantennummern und Namen der Lieferanten, 
 	die 3 verschiedene Artikel geliefert haben
 2. Nummern, Namen und Wohnort der Lieferanten, die bereits
-	geliefert haben und deren Statuswert größer als der
+	geliefert haben und deren Statuswert grÃ¶ÃŸer als der
 	durchschnittliche Statuswert aller Lieferanten ist.
 3. durchschnittliche Liefermenge des Artikels "A01"
 4. Anzahl der Lieferungen roter Artikel, die seit dem 05.05.90 
-	durchgefüht wurden
+	durchgefÃ¼ht wurden
 5. Nummern, Namen, und Wohnorte der Lieferanten, deren Status kleiner
 	als der von Lieferant L03 ist
 */
@@ -148,7 +148,7 @@ ON a.anr=b.anr JOIN lieferant c
 ON a.lnr=c.lnr
 WHERE farbe ='rot' AND ldatum >= '05.05.90';
 
--- Lösung 
+-- LÃ¶sung 
 SELECT COUNT (a.anr) FROM lieferung a JOIN artikel b
 ON a.anr=b.anr
 WHERE farbe = 'rot'
