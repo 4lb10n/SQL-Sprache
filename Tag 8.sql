@@ -1,18 +1,18 @@
 -- 19.06.24
 
--- Addition von Mengen mit UNION Kompatibilität
--- zwischen beiden Mengen muss UNION- Kompatibilität existieren
+-- Addition von Mengen mit UNION KompatibilitÃ¤t
+-- zwischen beiden Mengen muss UNION- KompatibilitÃ¤t existieren
 -- das bedeutet gleiche Anzahl von Spalten und Datentypen der zu addierenden
 -- Spalten muss kompatibel sein
 
--- UNION eliminiert automatisch doppelte Datensätze im Ergebnis
+-- UNION eliminiert automatisch doppelte DatensÃ¤tze im Ergebnis
 
 -- Alle Orte in denen Lieferanten wohnen oder in denen Artikel lagern.
 SELECT lstadt FROM lieferant
 UNION
 SELECT astadt FROM artikel;
 
--- alle Datensätze des Ergebis anzeigen
+-- alle DatensÃ¤tze des Ergebis anzeigen
 SELECT lstadt FROM lieferant
 UNION ALL
 SELECT astadt FROM artikel;
@@ -43,7 +43,7 @@ SELECT astadt FROM artikel;
 ------------------------------------------------------------------------------------
 -- zahlen runden
 
--- Modulo gibt den Ganzzahligen Divisionsrest zurück
+-- Modulo gibt den Ganzzahligen Divisionsrest zurÃ¼ck
 SELECT 5 % 2;
 
 SELECT ROUND(23.775, 1);		-- eine Stelle nach dem Komma
@@ -104,13 +104,13 @@ DATENAME(DW, ldatum) + ' der ' + DATENAME(DD,ldatum) + '. ' + DATENAME(MM,ldatum
 FROM lieferung
 ORDER BY ldatum ASC;
 
--- Übungsaufgaben
+-- Ãœbungsaufgaben
 
 -- 1. Ortsnamen, die Wohnort aber keine Lagerorte sind
 -- 2. Nummern und Bezeichnung aller Artikel, deren durchschnittliche Liefermenge
--- größer als die von A02 ist
+-- grÃ¶ÃŸer als die von A02 ist
 -- 3. Nummern, Namen und Wohnorte der Lieferanten, die bereits mindestens einmal geliefert haben
---	  und deren Status größer als der kleinste Lieferstatus aller Lieferanten ist
+--	  und deren Status grÃ¶ÃŸer als der kleinste Lieferstatus aller Lieferanten ist
 -- 4. Namen und Nummern der Lieferanten, die mindestens 3 verschiedene Artikel geliefert haben
 -- 5. Lagerorte der Artikel die von Lieferant L04 ausgeliefert wurden
 -- 6. Schreibe eine Abfrege die folgenden Satz ausgibt:
@@ -122,7 +122,7 @@ ON a.lstadt=b.astadt
 WHERE a.lstadt<>b.astadt
 GROUP BY a.lstadt;
 
---Lösung
+--LÃ¶sung
 
 
 
@@ -138,7 +138,7 @@ SELECT a.lnr, lname, lstadt FROM lieferant a JOIN lieferung b
 ON a.lnr=b.lnr
 WHERE lmenge = '1' AND status < (SELECT MIN(status) FROM lieferant);
 
---lösung
+--lÃ¶sung
 SELECT lnr, lname,lstadt FROM lieferant
 WHERE lnr IN (SELECT lnr FROM lieferung)
 AND status > (SELECT MIN(status) FROM lieferant);
@@ -148,7 +148,7 @@ SELECT a.lnr, lname FROM lieferant a JOIN lieferung b
 ON a.lnr=b.lnr
 WHERE;
 
--- lösung
+-- lÃ¶sung
 SELECT lname, lnr FROM lieferant
 WHERE lnr IN (SELECT lnr FROM lieferung
 				GROUP BY lnr
